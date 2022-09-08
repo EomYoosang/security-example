@@ -1,6 +1,7 @@
 package com.eomyoosang.securityexample.security.oauth2.handler;
 
 import com.eomyoosang.securityexample.config.AppProperties;
+import com.eomyoosang.securityexample.security.jwt.TokenProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,17 +21,14 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
-//    private TokenProvider tokenProvider;
+    private final TokenProvider tokenProvider;
     private final AppProperties appProperties;
-
     private final ObjectMapper objectMapper;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-//        String accessToken = tokenProvider.createToken(authentication);
-//        String refreshToken = tokenProvider.createRefreshToken();
-        String accessToken = "";
-        String refreshToken = "";
+        String accessToken = tokenProvider.createToken(authentication);
+        String refreshToken = tokenProvider.createRefreshToken();
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 //        // application/json(ajax) 요청일 경우 아래의 처리!
         MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
