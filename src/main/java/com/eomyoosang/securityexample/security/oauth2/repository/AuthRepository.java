@@ -1,7 +1,7 @@
-package com.eomyoosang.securityexample.oauth2.repository;
+package com.eomyoosang.securityexample.security.oauth2.repository;
 
 import com.eomyoosang.securityexample.domain.User;
-import com.eomyoosang.securityexample.oauth2.soical.SocialType;
+import com.eomyoosang.securityexample.security.oauth2.soical.SocialType;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package com.eomyoosang.securityexample.config;
 
-import com.eomyoosang.securityexample.oauth2.filter.OAuth2AccessTokenAuthenticationFilter;
+import com.eomyoosang.securityexample.security.oauth2.filter.OAuth2AccessTokenAuthenticationFilter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

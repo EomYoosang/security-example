@@ -1,7 +1,7 @@
-package com.eomyoosang.securityexample.oauth2.service;
+package com.eomyoosang.securityexample.security.oauth2.service;
 
-import com.eomyoosang.securityexample.oauth2.dto.KakaoUserInfo;
-import com.eomyoosang.securityexample.oauth2.soical.SocialType;
+import com.eomyoosang.securityexample.security.oauth2.dto.KakaoUserInfo;
+import com.eomyoosang.securityexample.security.oauth2.soical.SocialType;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 

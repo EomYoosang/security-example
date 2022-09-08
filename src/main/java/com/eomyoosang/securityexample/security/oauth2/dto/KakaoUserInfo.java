@@ -1,4 +1,4 @@
-package com.eomyoosang.securityexample.oauth2.dto;
+package com.eomyoosang.securityexample.security.oauth2.dto;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

@@ -1,6 +1,6 @@
-package com.eomyoosang.securityexample.oauth2.authentication;
+package com.eomyoosang.securityexample.security.oauth2.authentication;
 
-import com.eomyoosang.securityexample.oauth2.soical.SocialType;
+import com.eomyoosang.securityexample.security.oauth2.soical.SocialType;
 import lombok.Builder;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,10 +1,10 @@
-package com.eomyoosang.securityexample.oauth2.provider;
+package com.eomyoosang.securityexample.security.oauth2.provider;
 
 import com.eomyoosang.securityexample.domain.User;
-import com.eomyoosang.securityexample.oauth2.authentication.AccessTokenSocialTypeToken;
-import com.eomyoosang.securityexample.oauth2.repository.AuthRepository;
-import com.eomyoosang.securityexample.oauth2.service.LoadUserService;
-import com.eomyoosang.securityexample.oauth2.user.OAuth2UserDetails;
+import com.eomyoosang.securityexample.security.oauth2.authentication.AccessTokenSocialTypeToken;
+import com.eomyoosang.securityexample.security.oauth2.repository.AuthRepository;
+import com.eomyoosang.securityexample.security.oauth2.service.LoadUserService;
+import com.eomyoosang.securityexample.security.user.OAuth2UserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -13,7 +13,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.NoResultException;
 import java.util.Optional;
 
 @RequiredArgsConstructor

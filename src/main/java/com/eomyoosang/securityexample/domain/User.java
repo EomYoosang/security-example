@@ -1,6 +1,6 @@
 package com.eomyoosang.securityexample.domain;
 
-import com.eomyoosang.securityexample.oauth2.soical.SocialType;
+import com.eomyoosang.securityexample.security.oauth2.soical.SocialType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

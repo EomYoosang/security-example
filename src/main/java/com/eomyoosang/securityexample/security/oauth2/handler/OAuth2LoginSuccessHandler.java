@@ -1,12 +1,10 @@
-package com.eomyoosang.securityexample.oauth2.handler;
+package com.eomyoosang.securityexample.security.oauth2.handler;
 
 import com.eomyoosang.securityexample.config.AppProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nimbusds.oauth2.sdk.TokenResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.server.ServletServerHttpResponse;

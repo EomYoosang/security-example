@@ -1,4 +1,4 @@
-package com.eomyoosang.securityexample.oauth2.handler;
+package com.eomyoosang.securityexample.security.oauth2.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;

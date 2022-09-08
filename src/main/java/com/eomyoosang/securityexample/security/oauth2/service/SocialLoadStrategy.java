@@ -1,6 +1,6 @@
-package com.eomyoosang.securityexample.oauth2.service;
+package com.eomyoosang.securityexample.security.oauth2.service;
 
-import com.eomyoosang.securityexample.oauth2.dto.OAuth2UserInfo;
+import com.eomyoosang.securityexample.security.oauth2.dto.OAuth2UserInfo;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

@@ -1,4 +1,4 @@
-package com.eomyoosang.securityexample.oauth2.soical;
+package com.eomyoosang.securityexample.security.oauth2.soical;
 
 import org.springframework.http.HttpMethod;
 

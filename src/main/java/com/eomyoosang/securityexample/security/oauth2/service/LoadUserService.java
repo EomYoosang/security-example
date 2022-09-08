@@ -1,9 +1,9 @@
-package com.eomyoosang.securityexample.oauth2.service;
+package com.eomyoosang.securityexample.security.oauth2.service;
 
-import com.eomyoosang.securityexample.oauth2.authentication.AccessTokenSocialTypeToken;
-import com.eomyoosang.securityexample.oauth2.dto.OAuth2UserInfo;
-import com.eomyoosang.securityexample.oauth2.soical.SocialType;
-import com.eomyoosang.securityexample.oauth2.user.OAuth2UserDetails;
+import com.eomyoosang.securityexample.security.oauth2.authentication.AccessTokenSocialTypeToken;
+import com.eomyoosang.securityexample.security.oauth2.dto.OAuth2UserInfo;
+import com.eomyoosang.securityexample.security.oauth2.soical.SocialType;
+import com.eomyoosang.securityexample.security.user.OAuth2UserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
