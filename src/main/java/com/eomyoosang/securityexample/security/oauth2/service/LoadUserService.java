@@ -5,7 +5,9 @@ import com.eomyoosang.securityexample.security.oauth2.dto.OAuth2UserInfo;
 import com.eomyoosang.securityexample.security.oauth2.soical.SocialType;
 import com.eomyoosang.securityexample.security.user.OAuth2UserDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -17,7 +19,7 @@ public class LoadUserService {
     private SocialLoadStrategy socialLoadStrategy;//추상 클래스, 로그인을 진행하는 사이트레 따라 달라짐
 
 
-    public OAuth2UserDetails getOAuth2UserDetails(AccessTokenSocialTypeToken authentication)  {
+    public OAuth2UserDetails getOAuth2UserDetails(AccessTokenSocialTypeToken authentication) throws AuthenticationException {
 
         SocialType socialType = authentication.getSocialType();
 

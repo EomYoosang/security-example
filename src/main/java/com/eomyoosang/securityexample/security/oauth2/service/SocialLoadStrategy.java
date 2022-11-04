@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
@@ -18,7 +19,7 @@ public abstract class SocialLoadStrategy {
 
     protected final RestTemplate restTemplate = new RestTemplate();
 
-    public OAuth2UserInfo getUserInfo(String accessToken) {
+    public OAuth2UserInfo getUserInfo(String accessToken) throws HttpClientErrorException {
         HttpHeaders headers = new HttpHeaders();
 
         setHeaders(accessToken, headers);

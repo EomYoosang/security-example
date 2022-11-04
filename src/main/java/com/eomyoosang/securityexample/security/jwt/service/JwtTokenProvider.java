@@ -1,4 +1,4 @@
-package com.eomyoosang.securityexample.security.jwt;
+package com.eomyoosang.securityexample.security.jwt.service;
 
 import com.eomyoosang.securityexample.config.AppProperties;
 import com.eomyoosang.securityexample.domain.User;
@@ -16,13 +16,11 @@ import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
-public class TokenProvider {
+public class JwtTokenProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
     private final AppProperties appProperties;
 
-    @Autowired
-    public AuthRepository authRepository;
+    private final AuthRepository authRepository;
 
     public String createToken(Authentication authentication) {
         OAuth2UserDetails principalDetails = (OAuth2UserDetails) authentication.getPrincipal();
