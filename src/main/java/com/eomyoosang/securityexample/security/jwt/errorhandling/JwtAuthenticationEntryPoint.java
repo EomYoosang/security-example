@@ -1,6 +1,7 @@
 package com.eomyoosang.securityexample.security.jwt.errorhandling;
 
 import com.eomyoosang.securityexample.error.errorcode.ErrorCode;
+import com.eomyoosang.securityexample.error.errorcode.UserErrorCode;
 import com.nimbusds.jose.shaded.json.JSONObject;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -20,18 +21,18 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 //            setResponse(response, ErrorCode.FAILED_MESSAGE);
         }
         //잘못된 타입의 토큰인 경우
-        else if(exception.equals(ErrorCode.WRONG_TYPE_TOKEN)) {
-            setResponse(response, ErrorCode.WRONG_TYPE_TOKEN);
+        else if(exception.equals(UserErrorCode.WRONG_TYPE_TOKEN)) {
+            setResponse(response, UserErrorCode.WRONG_TYPE_TOKEN);
         }
-        else if(exception.equals(ErrorCode.WRONG_TYPE_SIGNATURE)) {
-            setResponse(response, ErrorCode.WRONG_TYPE_SIGNATURE);
+        else if(exception.equals(UserErrorCode.WRONG_TYPE_SIGNATURE)) {
+            setResponse(response, UserErrorCode.WRONG_TYPE_SIGNATURE);
         }
         //토큰 만료된 경우
-        else if(exception.equals(ErrorCode.EXPIRED_ACCESS_TOKEN)) {
-            setResponse(response, ErrorCode.EXPIRED_ACCESS_TOKEN);
+        else if(exception.equals(UserErrorCode.EXPIRED_ACCESS_TOKEN)) {
+            setResponse(response, UserErrorCode.EXPIRED_ACCESS_TOKEN);
         }
         else {
-            setResponse(response, ErrorCode.INVALID_ACCESS_TOKEN);
+            setResponse(response, UserErrorCode.INVALID_ACCESS_TOKEN);
         }
     }
 

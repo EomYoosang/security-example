@@ -25,4 +25,7 @@ app:
   oauth2:
     authorizedRedirectUris:
       - http://localhost:8080/oauth/redirect
+  redis:
+    host: localhost
+    port: 6379
 

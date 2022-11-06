@@ -1,7 +1,11 @@
 package com.eomyoosang.securityexample.security.oauth2.handler;
 
 import com.eomyoosang.securityexample.config.AppProperties;
+import com.eomyoosang.securityexample.domain.User;
+import com.eomyoosang.securityexample.dto.TokenResponse;
 import com.eomyoosang.securityexample.security.jwt.service.JwtTokenProvider;
+import com.eomyoosang.securityexample.security.repository.AuthRepository;
+import com.eomyoosang.securityexample.security.user.OAuth2UserDetails;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,28 +26,25 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
     private final JwtTokenProvider jwtTokenProvider;
+    private final AuthRepository authRepository;
     private final AppProperties appProperties;
     private final ObjectMapper objectMapper;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        String accessToken = jwtTokenProvider.createToken(authentication);
-        String refreshToken = jwtTokenProvider.createRefreshToken();
+        OAuth2UserDetails principalDetails = (OAuth2UserDetails) authentication.getPrincipal();
+        User user = authRepository.findBySocialTypeAndSocialId(principalDetails.getSocialType(), principalDetails.getSocialId()).get();
+
+        String accessToken = jwtTokenProvider.createToken(user.getId());
+        String refreshToken = jwtTokenProvider.createRefreshToken(user.getId());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
         MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
         MediaType jsonMimeType = MediaType.APPLICATION_JSON;
-//
+
         TokenResponse tokenResponse = new TokenResponse(accessToken, refreshToken);
         if (jsonConverter.canWrite(tokenResponse.getClass(), jsonMimeType)) {
             jsonConverter.write(tokenResponse, jsonMimeType, new ServletServerHttpResponse(response));
         }
-    }
-
-    @Data
-    @AllArgsConstructor
-    static class TokenResponse {
-        String accessToken;
-        String refreshToken;
     }
 }

@@ -1,7 +1,7 @@
 package com.eomyoosang.securityexample.service;
 
 import com.eomyoosang.securityexample.domain.User;
-import com.eomyoosang.securityexample.repository.UserRepository;
+import com.eomyoosang.securityexample.repository.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
+    private final UserJpaRepository userJpaRepository;
 
     public User findOne(Long id) {
-        return userRepository.findOne(id);
+        return userJpaRepository.findById(id).get();
     }
 }

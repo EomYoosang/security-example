@@ -1,7 +1,7 @@
 package com.eomyoosang.securityexample.security.jwt.service;
 
 import com.eomyoosang.securityexample.domain.User;
-import com.eomyoosang.securityexample.security.oauth2.repository.AuthRepository;
+import com.eomyoosang.securityexample.security.repository.AuthRepository;
 import com.eomyoosang.securityexample.security.user.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

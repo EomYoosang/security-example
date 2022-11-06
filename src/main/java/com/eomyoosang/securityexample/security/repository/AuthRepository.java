@@ -1,4 +1,4 @@
-package com.eomyoosang.securityexample.security.oauth2.repository;
+package com.eomyoosang.securityexample.security.repository;
 
 import com.eomyoosang.securityexample.domain.User;
 import com.eomyoosang.securityexample.security.oauth2.soical.SocialType;

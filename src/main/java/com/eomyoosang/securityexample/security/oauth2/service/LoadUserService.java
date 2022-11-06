@@ -31,7 +31,6 @@ public class LoadUserService {
                 .socialId(userInfo.getSocialId())
                 .socialType(socialType)
                 .username(userInfo.getName())
-                .email(userInfo.getEmail())
                 .image(userInfo.getImage())
                 .build();
     }

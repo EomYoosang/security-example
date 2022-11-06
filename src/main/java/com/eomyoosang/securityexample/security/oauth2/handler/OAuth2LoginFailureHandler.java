@@ -1,9 +1,6 @@
 package com.eomyoosang.securityexample.security.oauth2.handler;
 
-import com.eomyoosang.securityexample.error.errorcode.ErrorCode;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.eomyoosang.securityexample.error.errorcode.UserErrorCode;
 import com.nimbusds.jose.shaded.json.JSONObject;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -23,11 +20,11 @@ public class OAuth2LoginFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         response.setContentType("application/json;charset=UTF-8");
-        response.setStatus(ErrorCode.EXPIRED_SOCIAL_TOKEN.getHttpStatus().value());
+        response.setStatus(UserErrorCode.EXPIRED_SOCIAL_TOKEN.getHttpStatus().value());
 
         JSONObject responseJson = new JSONObject();
-        responseJson.put("message", ErrorCode.EXPIRED_SOCIAL_TOKEN.getMessage());
-        responseJson.put("code", ErrorCode.EXPIRED_SOCIAL_TOKEN.getHttpStatus().value());
+        responseJson.put("message", UserErrorCode.EXPIRED_SOCIAL_TOKEN.getMessage());
+        responseJson.put("code", UserErrorCode.EXPIRED_SOCIAL_TOKEN.getHttpStatus().value());
 
         response.getWriter().print(responseJson);
     }

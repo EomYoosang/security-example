@@ -39,4 +39,11 @@ public class User {
     private Timestamp createDate;
     @UpdateTimestamp
     private Timestamp updateDate;
+
+    private String refreshToken;
+
+    //== setter ==//
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 }

@@ -1,6 +1,6 @@
 package com.eomyoosang.securityexample.security.jwt.filter;
 
-import com.eomyoosang.securityexample.error.errorcode.ErrorCode;
+import com.eomyoosang.securityexample.error.errorcode.UserErrorCode;
 import com.eomyoosang.securityexample.security.jwt.service.JwtTokenProvider;
 import com.eomyoosang.securityexample.security.jwt.service.PrincipalDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -32,7 +32,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String jwt = getJwtFromRequest(request);
-            if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
+            String refreshToken = getRefreshTokenFromRequest(request);
+            if (refreshToken == null && StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
                 Long userId = jwtTokenProvider.getUserIdFromToken(jwt);
                 UserDetails userDetails = principalDetailsService.loadUserByUsername(Long.toString(userId));
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -40,15 +41,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (SignatureException e) {
-            request.setAttribute("exception", ErrorCode.WRONG_TYPE_SIGNATURE);
+            request.setAttribute("exception", UserErrorCode.WRONG_TYPE_SIGNATURE);
         } catch (MalformedJwtException e) {
-            request.setAttribute("exception", ErrorCode.WRONG_TYPE_TOKEN);
+            request.setAttribute("exception", UserErrorCode.WRONG_TYPE_TOKEN);
         } catch (ExpiredJwtException e) {
-            request.setAttribute("exception", ErrorCode.EXPIRED_ACCESS_TOKEN);
+            request.setAttribute("exception", UserErrorCode.EXPIRED_ACCESS_TOKEN);
         } catch (UnsupportedJwtException e) {
-            request.setAttribute("exception", ErrorCode.WRONG_TYPE_TOKEN);
+            request.setAttribute("exception", UserErrorCode.WRONG_TYPE_TOKEN);
         } catch (IllegalArgumentException e) {
-            request.setAttribute("exception", ErrorCode.INVALID_ACCESS_TOKEN);
+            request.setAttribute("exception", UserErrorCode.INVALID_ACCESS_TOKEN);
         }
 
         filterChain.doFilter(request, response);
@@ -60,5 +61,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return bearerToken.substring(7, bearerToken.length());
         }
         return null;
+    }
+
+    private String getRefreshTokenFromRequest(HttpServletRequest request) {
+        return request.getHeader("Refresh-Token");
     }
 }

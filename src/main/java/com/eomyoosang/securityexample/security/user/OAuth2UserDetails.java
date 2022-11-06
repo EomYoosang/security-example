@@ -15,14 +15,12 @@ import java.util.Set;
 
 @AllArgsConstructor
 @Builder
+@Getter
 public class OAuth2UserDetails implements UserDetails {
-
+    private Long id;
     private SocialType socialType;
     private String socialId;
     private String username;
-    @Getter
-    private String email;
-    @Getter
     private String image;
     private Set<GrantedAuthority> authorities;
 
@@ -57,6 +55,10 @@ public class OAuth2UserDetails implements UserDetails {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
         }
         this.authorities = Set.copyOf(authorities);
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 
