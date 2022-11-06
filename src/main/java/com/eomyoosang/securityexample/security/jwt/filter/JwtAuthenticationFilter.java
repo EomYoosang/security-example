@@ -3,10 +3,8 @@ package com.eomyoosang.securityexample.security.jwt.filter;
 import com.eomyoosang.securityexample.error.errorcode.UserErrorCode;
 import com.eomyoosang.securityexample.security.jwt.service.JwtTokenProvider;
 import com.eomyoosang.securityexample.security.jwt.service.PrincipalDetailsService;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
+import com.eomyoosang.securityexample.service.RedisService;
+import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,11 +25,15 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtTokenProvider jwtTokenProvider;
     private final PrincipalDetailsService principalDetailsService;
+    private final RedisService redisService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String jwt = getJwtFromRequest(request);
+            if (redisService.getValues(jwt) != null) {
+                throw new ExpiredJwtException(jwtTokenProvider.getHeaderFromToken(jwt), jwtTokenProvider.getClaimsFromToken(jwt), "Already logout");
+            }
             String refreshToken = getRefreshTokenFromRequest(request);
             if (refreshToken == null && StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
                 Long userId = jwtTokenProvider.getUserIdFromToken(jwt);

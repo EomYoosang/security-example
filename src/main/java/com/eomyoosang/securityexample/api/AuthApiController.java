@@ -39,7 +39,7 @@ public class AuthApiController {
         } catch (ExpiredJwtException e) {
             throw new ExpiredRefreshTokenException();
         }
-
+        redisService.logout(token.substring(7, token.length()));
         redisService.delValues(refreshToken);
         Long userIdFromAccessToken;
         try {

@@ -76,4 +76,15 @@ public class JwtTokenProvider {
         Jwts.parser().setSigningKey(appProperties.getAuth().getTokenSecret()).parseClaimsJws(authToken);
         return true;
     }
+
+    public Claims getClaimsFromToken(String token) {
+        return Jwts.parser()
+                .setSigningKey(appProperties.getAuth().getTokenSecret())
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    public Header getHeaderFromToken(String token) {
+        return Jwts.header();
+    }
 }
